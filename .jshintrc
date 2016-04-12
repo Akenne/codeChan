@@ -1,0 +1,10 @@
+{
+  "esnext": true,
+  "globals": {
+    "document": false,
+    "require": false,
+    "setTimeout": false,
+    "module": true
+  },
+  "globalstrict": true
+}
