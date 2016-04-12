@@ -4,7 +4,8 @@
   "description": "CodeReddit.net in React Form",
   "main": "main.js",
   "scripts": {
-    "start": "webpack"
+    "build": "webpack",
+    "start": "node ./server.js"
   },
   "author": "",
   "license": "ISC",
