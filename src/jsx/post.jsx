@@ -31,7 +31,7 @@ module.exports = React.createClass({
         this.setState({comments: [], loading: false});
       } else {
         this.setState({loading: true});
-        $.get("http://a.4cdn.org/" + this.props.subreddit + "/thread/" + this.props.no + ".json", function (result) {
+        $.get("/thread/" + this.props.subreddit + "/" + this.props.no, function (result) {
           result.posts.shift();
           console.log(result.posts);
           setTimeout(x => this.setState({comments: result.posts, loading: false}), 0);

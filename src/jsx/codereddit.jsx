@@ -47,11 +47,9 @@ module.exports = React.createClass({
       }
     },
     retrieveData: function() {
-      let url = "http://www.reddit.com/";
       let board = this.state.subreddit;
       this.setState({loading: true});
-      url = 'https://a.4cdn.org/' + board + '/catalog.json';
-      $.get(url, function (result) {
+      $.get("/board/" + board, function (result) {
         this.setState({data: result[this.state.page -1].threads, loading: false});
       }.bind(this));
     },

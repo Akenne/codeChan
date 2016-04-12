@@ -4,7 +4,7 @@
   "description": "CodeReddit.net in React Form",
   "main": "main.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack -p",
     "start": "node ./server.js"
   },
   "author": "",
@@ -22,6 +22,9 @@
     "babel-loader": "^5.0.0",
     "css-loader": "^0.10.1",
     "socket.io-client": "^1.4.5",
-    "style-loader": "^0.10.1"
+    "style-loader": "^0.10.1",
+    "http": "latest",
+    "url": "latest",
+    "express": "latest"
   }
 }
