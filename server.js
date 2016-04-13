@@ -7,6 +7,10 @@ app.get('/', function(req, res, next){
   res.sendFile(__dirname+'/index.html')
 });
 
+app.get('/googlee0532ea773d84ebd.html', function(req, res, next){
+  res.sendFile(__dirname+'/googlee0532ea773d84ebd.html')
+});
+
 app.get('/dist/bundle.min.js', function(req, res, next){
   res.sendFile(__dirname+'/dist/bundle.js')
 });
@@ -46,6 +50,5 @@ app.get('/thread/:board/:number', function(req, res, next){
       });
     });
 });
-
 
 app.listen(process.env.PORT || 8080);
