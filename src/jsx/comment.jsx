@@ -3,7 +3,7 @@
 let React = require('react');
 
 let Comment = React.createClass({
-    displayName: 'codeChan Reply',
+    displayName: 'stealthChan Reply',
     formatCommentText: function(){
       if (!this.props.com) {
         return '';
@@ -54,11 +54,19 @@ let Comment = React.createClass({
       }
       return new_text;
     },
+    imageExist: function() {
+      if (this.props.tim) {
+        return (<div>{'    '}<span style={{color: '#efdcbc'}}>{this.props.lang === 'php' ? "$": "var "}image</span> = <a style={{color: '#cc9393'}} href={'http://i.4cdn.org/' + this.props.subreddit + "/" + 
+              this.props.tim + this.props.ext}>"i.4cdn.org/{this.props.subreddit}/{this.props.tim}{this.props.ext}"</a>;<br/></div>);
+      } else {
+        return (<div></div>)
+      }
+    },
     render: function() {
       let commentNodes = this.props.children.map(childComment => {
         let children = childComment.data.replies ? childComment.data.replies.data.children : [];
         return (
-          <Comment key={childComment.data.id} children={children} author={childComment.data.author} lang={this.props.lang} score={childComment.data.score} text={childComment.data.body} space={this.props.space + "    "}/>
+          <Comment key={childComment.data.id} children={children} subreddit={this.props.subreddit}  author={childComment.data.author} lang={this.props.lang} tim={this.props.tim} ext={this.props.ext} score={childComment.data.score} text={childComment.data.body} space={this.props.space + "    "}/>
         );
       });
 
@@ -67,7 +75,18 @@ let Comment = React.createClass({
           return (
             <pre>
               {'    '}<span style={{color: '#efdcbc'}}>$author</span> = "{this.props.name}"; <span style={{color: '#efdcbc'}}>$postNum</span> = "{this.props.no}";<br/>
-              {'    /*'}<br/>
+              {this.imageExist()}
+              {'    /*'}<br/> 
+              <span dangerouslySetInnerHTML={{__html: this.formatCommentText()}} />
+              {'    */'}<br/><br/>
+            </pre>
+          );
+        case 'javascript':
+          return (
+            <pre>
+              {'    '}<span style={{color: '#efdcbc'}}>var author</span> = "{this.props.name}", <span style={{color: '#efdcbc'}}>postNum</span> = "{this.props.no}";<br/>
+              {this.imageExist()}
+              {'    /*'}<br/> 
               <span dangerouslySetInnerHTML={{__html: this.formatCommentText()}} />
               {'    */'}<br/><br/>
             </pre>

@@ -8,11 +8,13 @@ import axios from 'axios';
 import Post from './post';
 import Highlight from 'highlight.js';
 import {Link} from 'react-router';
+import createBrowserHistory from 'history/lib/createBrowserHistory'
+var history = createBrowserHistory({queryKey: false})
 
-let LANGS = ['php'];
+let LANGS = ['php', 'javascript'];
 
 module.exports = React.createClass({
-    displayName: 'codeChan',
+    displayName: 'stealthChan',
     getInitialState: function() {
       return {
         data: [],
@@ -55,7 +57,7 @@ module.exports = React.createClass({
     },
     handleLanguageChange: function() {
       var langIndex = (LANGS.indexOf(this.state.lang)+1) % LANGS.length;
-      this.props.history.pushState(null, '/', {lang: LANGS[langIndex]});
+      this.props.history.pushState(null, '/', {lang: LANGS[langIndex], page: this.state.page});
     },
     handleBoardChange: function() {
       document.getElementById('board').style.display = "none";
@@ -95,6 +97,31 @@ module.exports = React.createClass({
                   </div>
                   $page = "{this.state.page}";<br/>
                   $language = <a onClick={this.handleLanguageChange}>"{this.state.lang}"</a>;<br/>
+                  <Link to={`/${this.state.subreddit}?lang=${this.state.lang}&page=${parseInt(this.state.page) + 1}`}>nextPage();</Link><br/>
+                  <br/>
+                  {this.state.loading ? loadingNode : postNodes}
+                  <Link to={`/${this.state.subreddit}?lang=${this.state.lang}&page=${parseInt(this.state.page) + 1}`}>nextPage();</Link><br/>
+                </code>
+              </pre>
+          );
+        case 'javascript':
+          return (
+              <pre>
+                <code className={this.state.lang}>
+                  <Link to={`about`}>import Readme from 'readme');</Link><br/>
+                  <Link to={`/${this.state.subreddit}?lang=${this.state.lang}&page=${this.state.page}`}>var location = "{this.state.subreddit}";</Link><br/>
+                  <a onClick={ function () {
+                      document.getElementById('board').style.display = "";
+                      document.getElementById('submitButton').style.display = "";
+                      var linebreak = document.createElement("br");
+                      document.getElementById('fawas').appendChild(linebreak);
+                  }}>changeBoard()</a>;<br/>
+                  <div>
+                    <input type="text" id="board" style={{height: "9px", width: "25px", display: "none"}}></input>
+                    <input style={{display: "none"}} type="submit" id="submitButton" value="Submit" onClick={this.handleBoardChange}></input>
+                  </div>
+                  var page = "{this.state.page}";<br/>
+                  var language = <a onClick={this.handleLanguageChange}>"{this.state.lang}"</a>;<br/>
                   <Link to={`/${this.state.subreddit}?lang=${this.state.lang}&page=${parseInt(this.state.page) + 1}`}>nextPage();</Link><br/>
                   <br/>
                   {this.state.loading ? loadingNode : postNodes}

@@ -8,7 +8,7 @@ import Highlight from 'highlight.js';
 var $ = require('jquery');
 
 module.exports = React.createClass({
-    displayName: 'codeChan Thread',
+    displayName: 'stealthChan Thread',
     getInitialState: function () {
       return {
         comments: []
@@ -106,7 +106,7 @@ module.exports = React.createClass({
       let commentNodes = this.state.comments.map(childComment => {
         let children = childComment.posts ? childComment.posts : [];
         return (
-            <Comment subreddit={this.props.subreddit} key={childComment.no} no={childComment.no} now={childComment.now} name={childComment.name} com={childComment.com} lang={this.props.lang} children={children} space={"  "} />
+            <Comment subreddit={this.props.subreddit} key={childComment.no} subreddit={this.props.subreddit} no={childComment.no} now={childComment.now} tim={childComment.tim} ext={childComment.ext} name={childComment.name} com={childComment.com} lang={this.props.lang} children={children} space={"  "} />
         );
       });
       let loadingNode = <Comment lang={this.props.lang} author={`codeChan-system`} score={1337} children={[]} text={`Loading comments...`} space={"    "}></Comment>;
@@ -116,18 +116,38 @@ module.exports = React.createClass({
         case 'php':
           return (
             <pre>
-              function {this.shortenedTitle()}($replies={this.props.replies}, $board={this.props.subreddit}){' {'}<br/>
+              function {this.shortenedTitle()}($replies={this.props.replies}, $board="{this.props.subreddit}"){' {'}<br/>
                 {'  /*'}<br/>
                 <span dangerouslySetInnerHTML={{__html: this.formattedText()}} />
                 {'  */'}<br/><br/>
                 {'  '}$author = "{this.props.name}";<br/>
-                {'  '}$link = <a href="http://boards.4chan.org/{this.props.subreddit}/thread/{this.props.no}">"http://boards.4chan.org/{this.props.subreddit}/thread/{this.props.no}"</a>;<br/><br/>
+                {'  '}$link = <a href={"http://boards.4chan.org/" + this.props.subreddit + "/thread/" + this.props.no}>"http://boards.4chan.org/{this.props.subreddit}/thread/{this.props.no}"</a>;<br/>
+                {'  '}$image = <a href={"http://i.4cdn.org/" + this.props.subreddit + "/" + this.props.tim + this.props.ext}>"i.4cdn.org/{this.props.subreddit}/{this.props.tim}{this.props.ext}"</a>;<br/><br/>
                 {'  '}// Click to load comments{'\n'}
                 {'  '}<a onClick={this.toggleComments}>for ($numComments = 0; $numComments {'<'}= {this.props.replies}; $numComments++){' {'}</a>
               {'  '}{this.state.loading ? loadingNode : commentNodes}<br/><br/><br/>
                 {'  }'}<br/>
               {'}'}
               <br/><br/>
+            </pre>
+          );
+        case 'javascript':
+          return (
+            <pre>
+              function {this.shortenedTitle()}(var replies={this.props.replies}, board="{this.props.subreddit}"){' {'}<br/>
+                {'  /*'}<br/>
+                <span dangerouslySetInnerHTML={{__html: this.formattedText()}} />
+                {'  */'}<br/><br/>
+                {'  '}var author = "{this.props.name}";<br/>
+                {'  '}var link = <a href={"http://boards.4chan.org/" + this.props.subreddit + "/thread/" + this.props.no}>"http://boards.4chan.org/{this.props.subreddit}/thread/{this.props.no}"</a>;<br/>
+                {'  '}var image = <a href={"http://i.4cdn.org/" + this.props.subreddit + "/" + this.props.tim + this.props.ext}>"i.4cdn.org/{this.props.subreddit}/{this.props.tim}{this.props.ext}"</a>;<br/><br/>
+                {'  '}// Click to load comments{'\n'}
+                {'  '}<a onClick={this.toggleComments}>for (var numComments = 0; numComments {'<'}= {this.props.replies}; numComments++){' {'}</a>
+              {'  '}{this.state.loading ? loadingNode : commentNodes}<br/><br/><br/>
+                {'  }'}<br/>
+              {'}'}
+              <br/>
+              <br/>
             </pre>
           );
       }

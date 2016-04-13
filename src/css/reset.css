@@ -21,6 +21,13 @@ a {
 	color: #91AD85;
 }
 
+.javascript.hljs{
+	background: #272822;
+}
+.php.hljs{
+	background: #272822;
+}
+
 a:hover {
     text-decoration: underline;
 }

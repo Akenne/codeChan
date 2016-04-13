@@ -26,7 +26,7 @@ module.exports = [
         },
         hot: true,
         inline: false,
-        historyApiFallback: false,
+        historyApiFallback: true,
         stats: {
             colors: true,
         },
