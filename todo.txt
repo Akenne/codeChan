@@ -1,0 +1,17 @@
+image to ascii converter... way to show images in browser
+
+easily redirect based on board
+
+show single thread
+
+add ads.
+
+close inline button after all the comments.
+
+change board button is shit
+
+submit entry box : enter does nothing
+
+https://boards.4chancode.org/r9k/
+
+field verify board change / thread so it doesnt crash my server;
